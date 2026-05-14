@@ -1,0 +1,15 @@
+# Docker data folders
+matter-data/
+nodered-data/
+data/
+
+# Environment files
+.env
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
