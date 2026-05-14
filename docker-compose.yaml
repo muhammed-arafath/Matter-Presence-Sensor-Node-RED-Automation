@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+
+  matter-server:
+    container_name: matter-server
+    image: ghcr.io/home-assistant-libs/python-matter-server:stable
+    restart: unless-stopped
+    network_mode: host
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - ./matter-data:/data
+      - /run/dbus:/run/dbus:ro
+    command: --storage-path /data --paa-root-cert-dir /data/credentials --bluetooth-adapter 0
+
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    ports:
+      - "1880:1880"
+    network_mode: host
+    volumes:
+      - ./data:/data
+    environment:
+      - TZ=Asia/Riyadh
+    restart: unless-stopped
